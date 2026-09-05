@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belajar Ngoding dari Nol untuk Pemula — Peta Belajar Coding Gratis</title>
+
+<!-- ===== SEO: PRIORITAS #3 (Bangun Traffic Organik) =====
+     Ganti "GANTI-DENGAN-DOMAIN-KAMU.com" di bawah dengan domain asli
+     setelah kamu beli domain sendiri (lihat PRIORITAS #1). -->
+<meta name="description" content="Belajar coding dari nol lewat peta belajar interaktif: 10 level, latihan soal, dan latihan coding langsung di browser. Gratis, santai, cocok untuk pemula total.">
+<meta name="keywords" content="belajar coding untuk pemula, belajar ngoding dari nol, roadmap belajar programming, kursus coding gratis, belajar bahasa pemrograman">
+<meta name="author" content="Muhammad Raihan & Naufal Abdillah">
+<link rel="canonical" href="https://GANTI-DENGAN-DOMAIN-KAMU.com/">
+
+<!-- Open Graph (tampilan saat link dibagikan di WhatsApp/Facebook/LinkedIn) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Belajar Ngoding dari Nol — Peta Belajar Coding Gratis">
+<meta property="og:description" content="Peta belajar coding interaktif untuk pemula: 10 level, latihan soal, dan latihan coding langsung di browser.">
+<meta property="og:url" content="https://GANTI-DENGAN-DOMAIN-KAMU.com/">
+<meta property="og:image" content="https://GANTI-DENGAN-DOMAIN-KAMU.com/preview.png">
+<meta property="og:locale" content="id_ID">
+
+<!-- Twitter/X Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Belajar Ngoding dari Nol — Peta Belajar Coding Gratis">
+<meta name="twitter:description" content="Peta belajar coding interaktif untuk pemula: 10 level, latihan soal, dan latihan coding langsung di browser.">
+<meta name="twitter:image" content="https://GANTI-DENGAN-DOMAIN-KAMU.com/preview.png">
+
+<!-- Data terstruktur untuk Google (membantu muncul sebagai rich result) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Belajar Ngoding dari Nol",
+  "description": "Peta belajar coding interaktif untuk pemula, dibagi menjadi 10 level dengan latihan soal dan latihan coding.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Belajar Ngoding dari Nol"
+  }
+}
+</script>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- ===== PRIORITAS #2 (Pasang Monetisasi Dasar): Google AdSense =====
+     Baru aktifkan setelah akun AdSense kamu disetujui Google.
+     Daftar dulu di https://www.google.com/adsense — butuh domain sendiri (lihat PRIORITAS #1).
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+-->
+
+<!-- ===== PRIORITAS #4 (Rapikan Struktur & Data): Google Analytics =====
+     Ganti G-XXXXXXXXXX dengan ID pengukuran dari Google Analytics kamu.
+     Pasang ini SEKARANG (walau web belum ramai) supaya histori traffic mulai terekam dari hari ini.
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">belajar<span>_</span>ngoding</div>
+    <div class="topbar-right">
+      <select class="jump-select" id="jumpSelect" title="Lompat ke level">
+        <option value="">Lompat ke level…</option>
+      </select>
+      <button class="icon-btn" id="searchToggle" title="Cari topik">🔍</button>
+      <button class="icon-btn" id="themeToggle" title="Ganti tema">🌙</button>
+      <div class="progress-pill">
+        <span class="pct" id="progressPct">0%</span>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="searchbar-row" id="searchRow">
+    <input type="text" id="searchInput" placeholder="Cari topik, mis. 'git', 'array', 'css'…">
+  </div>
+
+  <!-- ============ HALAMAN: BERANDA ============ -->
+  <div id="view-home">
+
+    <header class="hero">
+      <div class="hero-inner">
+        <h1>Mulai dari nol. Sampai bisa bikin sesuatu yang nyata.</h1>
+        <p class="lede">Peta belajar ngoding dari nol, dibagi jadi level-level kecil yang bisa dicentang satu per satu. Nggak perlu langsung paham semua — cukup selesaikan satu level, lalu lanjut.</p>
+        <div class="hero-cta-row">
+          <a href="#dashboard" class="hero-cta">Lihat peta belajar</a>
+          <button type="button" class="hero-cta-secondary" id="continueBtn">↻ Lanjutkan dari level terakhir</button>
+        </div>
+
+        <div class="terminal">
+          <div class="terminal-head"><i></i><i></i><i></i></div>
+          <div class="terminal-body" id="termBody"><span class="prompt" style="color:#E8A33D;">$</span> <span id="termText"></span><span class="caret"></span></div>
+        </div>
+
+        <div class="hero-stats">
+          <div><b>10</b><span>level belajar</span></div>
+          <div><b>0 → 1</b><span>dari awam ke bikin proyek</span></div>
+          <div><b>santai</b><span>jalan sesuai ritme sendiri</span></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="lang-section" id="langSection">
+      <h2>💬 Mau belajar bahasa apa?</h2>
+      <p>Pilih salah satu — beberapa level di peta belajar (dasar bahasa, struktur kontrol, struktur data & fungsi, paradigma, dan ekosistem/tooling) akan otomatis menyesuaikan topik, soal, dan latihan coding sesuai bahasa yang kamu pilih. Bisa diganti kapan saja.</p>
+      <div class="lang-grid" id="langGrid"></div>
+      <p class="lang-current" id="langCurrent"></p>
+    </section>
+
+    <section class="dashboard" id="dashboard">
+      <div class="dash-grid">
+        <div class="dash-card"><b id="statLevels">0/10</b><span>level selesai</span></div>
+        <div class="dash-card"><b id="statTopics">0/0</b><span>topik dicentang</span></div>
+        <div class="dash-card"><b id="statFav">0</b><span>level ditandai favorit</span></div>
+        <div class="dash-card"><b id="statNotes">0</b><span>level dengan catatan</span></div>
+        <div class="dash-card"><b id="statCoding">0/0</b><span>latihan coding selesai</span></div>
+      </div>
+
+      <div class="filters" id="filterRow">
+        <button class="filter-btn active" data-filter="all">Semua level</button>
+        <button class="filter-btn" data-filter="incomplete">Belum selesai</button>
+        <button class="filter-btn" data-filter="done">Sudah selesai</button>
+        <button class="filter-btn" data-filter="fav">Favorit</button>
+      </div>
+
+      <div class="toolbelt">
+        <button class="tool-btn" id="exportBtn">⬇ Cadangkan ke file (pindah perangkat)</button>
+        <button class="tool-btn" id="importBtn">⬆ Muat dari file cadangan</button>
+        <input type="file" id="importFile" accept="application/json" style="display:none;">
+        <button class="tool-btn danger" id="resetBtn">↺ Reset semua progress</button>
+        <button class="tool-btn accent" id="examJumpBtn">🎓 Kerjakan Ujian Akhir</button>
+        <span class="save-indicator" id="saveIndicator">✅ Progress otomatis tersimpan di browser ini</span>
+      </div>
+    </section>
+
+    <section class="howto">
+      <h2>Cara pakai peta ini</h2>
+      <p>Klik judul level untuk membuka detailnya, lalu centangi topik yang sudah dipelajari. Tandai ⭐ level yang ingin ditonjolkan, tulis catatan pribadi di tiap level, dan buka tombol "Kerjakan Latihan Soal & Coding" untuk mengerjakan soal serta latihan coding level tersebut di halaman terpisah — semua progres otomatis tersimpan di browser ini. Kalau mau pindah ke HP/laptop lain atau sekadar cadangan, tetap bisa simpan/muat progress lewat file JSON.</p>
+    </section>
+
+    <main class="roadmap" id="roadmap"></main>
+    <p class="empty-state" id="emptyState" style="display:none;">Tidak ada level yang cocok dengan filter atau pencarian ini.</p>
+
+    <!-- ===== PRIORITAS #2: slot iklan display (mis. Google AdSense) =====
+         Setelah AdSense disetujui, ganti isi div ini dengan kode <ins class="adsbygoogle">
+         yang diberikan Google. Ditaruh di sini karena pengunjung sudah scroll cukup jauh
+         (baca peta belajar) sehingga tidak mengganggu first impression di hero. -->
+    <div class="ad-slot" id="adSlotMid">
+      <span class="ad-slot-label">Ruang Iklan</span>
+    </div>
+
+    <!-- ===== PRIORITAS #2: contoh rekomendasi afiliasi =====
+         Ganti judul/link di bawah dengan produk afiliasi asli (mis. kursus coding
+         berbayar, buku, atau tool development) setelah kamu daftar program afiliasinya. -->
+    <section class="recommend">
+      <h2>🔗 Rekomendasi buat lanjut belajar</h2>
+      <p>Kalau sudah nyaman dengan dasar-dasarnya di sini, beberapa resource lanjutan yang bisa kamu pertimbangkan:</p>
+      <div class="recommend-grid">
+        <a class="recommend-card" href="#" rel="sponsored noopener" target="_blank">
+          <b>Kursus Coding Terstruktur</b>
+          <span>Ganti dengan link afiliasi kursus (mis. Dicoding, Udemy, dsb.)</span>
+        </a>
+        <a class="recommend-card" href="#" rel="sponsored noopener" target="_blank">
+          <b>Buku/Ebook Pemrograman</b>
+          <span>Ganti dengan link afiliasi buku (mis. Amazon Associates, Gramedia)</span>
+        </a>
+        <a class="recommend-card" href="#" rel="sponsored noopener" target="_blank">
+          <b>Hosting/Domain untuk Proyek</b>
+          <span>Ganti dengan link afiliasi hosting/domain (mis. Niagahoster)</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== PRIORITAS #3: konten artikel untuk SEO/traffic organik =====
+         Ini contoh 2 artikel pendek. Idealnya tiap artikel jadi halaman .html
+         terpisah (mis. /artikel/cara-mulai-belajar-coding.html) supaya bisa
+         menangkap lebih banyak kata kunci pencarian di Google. -->
+    <section class="articles">
+      <h2>📝 Artikel & Tips</h2>
+      <article class="article-card">
+        <h3>Cara Mulai Belajar Coding Otodidak Tanpa Bingung</h3>
+        <p>Banyak pemula berhenti di minggu pertama karena mencoba belajar semua hal sekaligus. Kuncinya: pilih satu bahasa, selesaikan dasar-dasarnya dulu, baru bikin proyek kecil yang nyata — sekecil apa pun. Progres kecil yang konsisten jauh lebih efektif daripada belajar maraton lalu berhenti total.</p>
+      </article>
+      <article class="article-card">
+        <h3>Bahasa Pemrograman Apa yang Cocok untuk Pemula?</h3>
+        <p>Tidak ada jawaban tunggal — tapi kalau tujuannya web, JavaScript jadi pilihan wajar karena langsung terlihat hasilnya di browser. Kalau tertarik data atau otomatisasi, Python lebih ramah untuk pemula karena sintaksnya sederhana. Yang terpenting bukan bahasanya, tapi konsistensi latihan.</p>
+      </article>
+    </section>
+
+    <section class="closing">
+      <h2>Nggak ada yang langsung jago dari level 1.</h2>
+      <p>Yang membedakan orang yang akhirnya bisa ngoding dan yang berhenti di tengah jalan cuma satu: terus lanjut walau pelan. Selesaikan satu topik hari ini, satu lagi besok.</p>
+      <div class="signoff">selamat belajar &amp; selamat error-error pertama :)</div>
+      <div class="credit">Dibuat oleh <b>Muhammad Raihan</b> &amp; <b>Naufal Abdillah</b></div>
+    </section>
+
+  </div>
+
+  <!-- ============ HALAMAN: LATIHAN SOAL & CODING PER LEVEL ============ -->
+  <div id="view-practice" style="display:none;">
+    <div class="practice-nav">
+      <button class="back-btn" id="practiceBackBtn">← Kembali ke Beranda</button>
+      <div class="practice-nav-right">
+        <button class="nav-arrow-btn" id="practicePrevBtn">‹ Level sebelumnya</button>
+        <button class="nav-arrow-btn" id="practiceNextBtn">Level berikutnya ›</button>
+      </div>
+    </div>
+    <div class="practice-header" id="practiceHeader"></div>
+    <div id="practiceLevels"></div>
+  </div>
+
+  <!-- ============ HALAMAN: UJIAN AKHIR ============ -->
+  <div id="view-exam" style="display:none;">
+    <div class="practice-nav">
+      <button class="back-btn" id="examBackBtn">← Kembali ke Beranda</button>
+    </div>
+    <section class="exam-section" id="examSection">
+      <div class="exam-card">
+        <h2>🎓 Ujian Akhir</h2>
+        <p>Setelah mencicil latihan soal di tiap level, coba uji pemahamanmu di sini. Ujian ini dibagi menjadi beberapa TAHAP (bukan cuma satu babak panjang) — setiap tahap mencakup dua level roadmap sekaligus, dan kamu harus menyelesaikan satu tahap dulu sebelum lanjut ke tahap berikutnya. Setiap kali jawab, langsung muncul penjelasan. Bisa diulang kapan saja, tidak ada batas waktu.</p>
+        <div class="exam-stage-tracker" id="examStageTracker"></div>
+        <button class="exam-start-btn" id="examStartBtn">Mulai Ujian Akhir</button>
+        <div id="examBody" style="display:none;margin-top:20px;">
+          <h3 class="exam-stage-title" id="examStageTitle"></h3>
+          <div class="exam-live-bar" id="examLiveBar">Terjawab: 0/0 • Skor sementara: 0/0</div>
+          <div id="examQuestions"></div>
+          <button class="exam-finish-btn" id="examFinishBtn">Lihat Hasil Akhir</button>
+          <div class="exam-result" id="examResult"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <button class="backtotop" id="backToTop" title="Kembali ke atas">↑</button>
+  <div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
