@@ -5,29 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Belajar Ngoding dari Nol untuk Pemula — Peta Belajar Coding Gratis</title>
 
-<!-- ===== SEO: PRIORITAS #3 (Bangun Traffic Organik) =====
-     Ganti "GANTI-DENGAN-DOMAIN-KAMU.com" di bawah dengan domain asli
-     setelah kamu beli domain sendiri (lihat PRIORITAS #1). -->
+<!-- SEO Meta Tags -->
 <meta name="description" content="Belajar coding dari nol lewat peta belajar interaktif: 10 level, latihan soal, dan latihan coding langsung di browser. Gratis, santai, cocok untuk pemula total.">
 <meta name="keywords" content="belajar coding untuk pemula, belajar ngoding dari nol, roadmap belajar programming, kursus coding gratis, belajar bahasa pemrograman">
 <meta name="author" content="Muhammad Raihan & Naufal Abdillah">
 <link rel="canonical" href="https://GANTI-DENGAN-DOMAIN-KAMU.com/">
 
-<!-- Open Graph (tampilan saat link dibagikan di WhatsApp/Facebook/LinkedIn) -->
+<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Belajar Ngoding dari Nol — Peta Belajar Coding Gratis">
 <meta property="og:description" content="Peta belajar coding interaktif untuk pemula: 10 level, latihan soal, dan latihan coding langsung di browser.">
 <meta property="og:url" content="https://GANTI-DENGAN-DOMAIN-KAMU.com/">
-<meta property="og:image" content="https://GANTI-DENGAN-DOMAIN-KAMU.com/preview.png">
 <meta property="og:locale" content="id_ID">
 
-<!-- Twitter/X Card -->
+<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Belajar Ngoding dari Nol — Peta Belajar Coding Gratis">
 <meta name="twitter:description" content="Peta belajar coding interaktif untuk pemula: 10 level, latihan soal, dan latihan coding langsung di browser.">
-<meta name="twitter:image" content="https://GANTI-DENGAN-DOMAIN-KAMU.com/preview.png">
 
-<!-- Data terstruktur untuk Google (membantu muncul sebagai rich result) -->
+<!-- Schema.org -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -43,26 +39,14 @@
 
 <link rel="stylesheet" href="style.css">
 
-<!-- ===== PRIORITAS #2 (Pasang Monetisasi Dasar): Google AdSense =====
-     Baru aktifkan setelah akun AdSense kamu disetujui Google.
-     Daftar dulu di https://www.google.com/adsense — butuh domain sendiri (lihat PRIORITAS #1).
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
--->
-
-<!-- ===== PRIORITAS #4 (Rapikan Struktur & Data): Google Analytics =====
-     Ganti G-XXXXXXXXXX dengan ID pengukuran dari Google Analytics kamu.
-     Pasang ini SEKARANG (walau web belum ramai) supaya histori traffic mulai terekam dari hari ini.
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
--->
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 </head>
 <body>
 
+  <!-- ============ TOPBAR ============ -->
   <div class="topbar">
     <div class="brand">belajar<span>_</span>ngoding</div>
     <div class="topbar-right">
@@ -75,11 +59,8 @@
         <span class="pct" id="progressPct">0%</span>
         <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
       </div>
-      <!-- ===== FITUR BARU: Login Google (sync progress via Firebase Auth) =====
-           Butuh provider "Google" diaktifkan di Firebase Authentication.
-           Kalau Firebase belum disambungkan, tombol ini otomatis disembunyikan
-           (lihat initAuthUI() di script.js). -->
-      <button class="icon-btn" id="loginGoogleBtn" title="Login dengan Google supaya progress tersimpan ke akun" style="display:none;">🔑 Login</button>
+      <!-- Login Google -->
+      <button class="icon-btn" id="loginGoogleBtn" title="Login dengan Google">🔑 Login</button>
       <div class="user-badge" id="userBadge" style="display:none;">
         <img id="userAvatar" alt="">
         <span id="userName"></span>
@@ -117,105 +98,22 @@
       </div>
     </header>
 
+    <!-- Pilih Bahasa -->
     <section class="lang-section" id="langSection">
       <h2>💬 Mau belajar bahasa apa?</h2>
-      <p>Pilih salah satu — beberapa level di peta belajar (dasar bahasa, struktur kontrol, struktur data & fungsi, paradigma, ekosistem/tooling, dan backend & database) akan otomatis menyesuaikan topik, soal, dan latihan coding sesuai bahasa yang kamu pilih. Level lain (mis. mindset, Git, proyek portofolio) memang sengaja sama untuk semua bahasa — lihat badge di tiap kartu level. Bisa diganti kapan saja.</p>
+      <p>Pilih salah satu — beberapa level di peta belajar akan otomatis menyesuaikan dengan bahasa yang kamu pilih.</p>
       <div class="lang-grid" id="langGrid"></div>
       <p class="lang-current" id="langCurrent"></p>
     </section>
 
-    <!-- ===== FITUR BARU: Kuis Harian =====
-         Tujuannya bikin orang balik ke web tiap hari (bukan cuma sekali datang lalu pergi).
-         Soal diambil acak dari seluruh bank soal (bertambah otomatis kalau LEVELS.quiz ditambah),
-         diacak ulang tiap hari, dan progres "streak" (hari berturut-turut) tersimpan di browser. -->
-    <section class="daily-quiz" id="dailyQuizSection">
-      <div class="daily-quiz-head">
-        <div>
-          <h2>🗓️ Kuis Harian</h2>
-          <p>5 soal acak baru setiap hari. Kerjakan tiap hari buat jaga <b>streak</b> belajarmu.</p>
-        </div>
-        <div class="streak-badge" id="streakBadge">🔥 0 hari</div>
-      </div>
-      <div id="dailyQuizIntro">
-        <button type="button" class="exam-start-btn" id="dailyQuizStartBtn">Mulai Kuis Hari Ini</button>
-        <span class="daily-quiz-status" id="dailyQuizStatus"></span>
-      </div>
-      <div id="dailyQuizBody" style="display:none;">
-        <div id="dailyQuizQuestions"></div>
-        <button class="exam-finish-btn" id="dailyQuizFinishBtn">Selesai</button>
-        <div class="exam-result" id="dailyQuizResult"></div>
-      </div>
+    <!-- Quick Links -->
+    <section class="quick-links">
+      <a href="javascript:void(0)" class="quick-link-btn" id="dailyQuizLinkBtn">🗓️ Kuis Harian</a>
+      <a href="javascript:void(0)" class="quick-link-btn" id="endlessLinkBtn">🔁 Latihan Tanpa Henti</a>
+      <a href="javascript:void(0)" class="quick-link-btn" id="leaderboardLinkBtn">🏆 Papan Peringkat</a>
     </section>
 
-    <!-- ===== FITUR BARU: Latihan Tanpa Henti (mode ala Duolingo) =====
-         Beda dari Kuis Harian di atas (5 soal, sekali sehari untuk streak),
-         ini mode BEBAS: soal terus muncul tanpa batas dari bank soal gabungan
-         semua bahasa (PRACTICE_POOL di script.js), dapat XP tiap jawab,
-         naik "rank" seiring waktu. Cocok dipakai kapan saja, berkali-kali sehari. -->
-    <section class="endless-practice" id="endlessSection">
-      <div class="daily-quiz-head">
-        <div>
-          <h2>🔁 Latihan Tanpa Henti</h2>
-          <p>Soal terus lanjut tanpa batas — dari bank soal gabungan semua bahasa. Kerjakan sesering yang kamu mau.</p>
-        </div>
-        <div class="xp-badge" id="xpBadge">⭐ 0 XP · Pemula</div>
-      </div>
-      <div id="endlessIntro">
-        <button type="button" class="exam-start-btn" id="endlessStartBtn">Mulai Latihan</button>
-      </div>
-      <div id="endlessBody" style="display:none;">
-        <div id="endlessQuestion"></div>
-        <button class="exam-finish-btn" id="endlessNextBtn">Soal Berikutnya →</button>
-      </div>
-    </section>
-
-    <!-- ===== FITUR BARU: Papan Peringkat (Leaderboard) =====
-         Butuh Firebase supaya data XP bisa dibandingkan antar pengunjung
-         (localStorage saja tidak cukup, karena datanya cuma ada di browser
-         masing-masing). Kalau FIREBASE_CONFIG di script.js belum diisi,
-         section ini menampilkan pesan "belum aktif" secara aman. -->
-    <section class="leaderboard-section" id="leaderboardSection">
-      <div class="daily-quiz-head">
-        <div>
-          <h2>🏆 Papan Peringkat</h2>
-          <p>Bandingkan XP kamu dengan pembelajar lain. Nama panggilan dipakai supaya bisa muncul di papan peringkat.</p>
-        </div>
-      </div>
-      <div id="leaderboardNamePrompt" style="display:none;">
-        <input type="text" id="leaderboardNameInput" placeholder="Nama panggilan kamu" maxlength="20">
-        <button type="button" id="leaderboardNameSaveBtn">Gabung Papan Peringkat</button>
-      </div>
-      <div id="leaderboardNotReady" style="display:none;">
-        <span class="daily-quiz-status">⚙️ Papan peringkat belum aktif — pemilik web perlu menyambungkan Firebase dulu.</span>
-      </div>
-      <ol id="leaderboardList" class="leaderboard-list"></ol>
-    </section>
-
-    <!-- ===== FITUR BARU: Premium / Berlangganan =====
-         PENTING: ini situs statis (GitHub Pages) tanpa server, jadi tidak bisa memproses
-         pembayaran kartu kredit sendiri. Pendekatan realistis: pengguna bayar lewat
-         Saweria/Trakteer/Lynk.id, lalu dapat KODE UNLOCK yang ditempel di sini secara manual.
-         Ganti isi array UNLOCK_CODES di script.js dengan kode unik buatanmu sendiri. -->
-    <section class="premium-section" id="premiumSection">
-      <div class="premium-card" id="premiumLocked">
-        <span class="premium-badge">✨ Premium</span>
-        <h2>Buka Fitur Lengkap</h2>
-        <p>Dukung pengembangan web ini dan dapatkan: bank soal ujian akhir versi lengkap (bukan cuma ringkas), sertifikat penyelesaian dalam format gambar, dan tanpa iklan.</p>
-        <div class="premium-price">Rp 19.000<span>/bulan</span></div>
-        <a class="premium-buy-btn" href="#" target="_blank" rel="noopener">Bayar via Saweria / Trakteer →</a>
-        <div class="premium-redeem">
-          <input type="text" id="premiumCodeInput" placeholder="Sudah bayar? Masukkan kode di sini">
-          <button type="button" id="premiumRedeemBtn">Aktifkan</button>
-        </div>
-        <span class="premium-note" id="premiumNote"></span>
-      </div>
-      <div class="premium-card premium-unlocked" id="premiumUnlocked" style="display:none;">
-        <span class="premium-badge unlocked">✅ Member Premium</span>
-        <h2>Makasih sudah mendukung! 🎉</h2>
-        <p>Semua fitur premium sudah aktif di browser ini.</p>
-      </div>
-    </section>
-
+    <!-- Dashboard Stats -->
     <section class="dashboard" id="dashboard">
       <div class="dash-grid">
         <div class="dash-card"><b id="statLevels">0/10</b><span>level selesai</span></div>
@@ -233,18 +131,18 @@
       </div>
 
       <div class="toolbelt">
-        <button class="tool-btn" id="exportBtn">⬇ Cadangkan ke file (pindah perangkat)</button>
-        <button class="tool-btn" id="importBtn">⬆ Muat dari file cadangan</button>
+        <button class="tool-btn" id="exportBtn">⬇ Cadangkan ke file</button>
+        <button class="tool-btn" id="importBtn">⬆ Muat dari file</button>
         <input type="file" id="importFile" accept="application/json" style="display:none;">
         <button class="tool-btn danger" id="resetBtn">↺ Reset semua progress</button>
-        <button class="tool-btn accent" id="examJumpBtn">🎓 Kerjakan Ujian Akhir</button>
-        <span class="save-indicator" id="saveIndicator">✅ Progress otomatis tersimpan di browser ini</span>
+        <button class="tool-btn accent" id="examJumpBtn">🎓 Ujian Akhir</button>
+        <span class="save-indicator" id="saveIndicator">✅ Progress tersimpan</span>
       </div>
     </section>
 
     <section class="howto">
       <h2>Cara pakai peta ini</h2>
-      <p>Klik judul level untuk membuka detailnya, lalu centangi topik yang sudah dipelajari. Tandai ⭐ level yang ingin ditonjolkan, tulis catatan pribadi di tiap level, dan buka tombol "Kerjakan Latihan Soal & Coding" untuk mengerjakan soal serta latihan coding level tersebut di halaman terpisah — semua progres otomatis tersimpan di browser ini. Kalau mau pindah ke HP/laptop lain atau sekadar cadangan, tetap bisa simpan/muat progress lewat file JSON.</p>
+      <p>Klik judul level untuk membuka detailnya, lalu centangi topik yang sudah dipelajari. Tandai ⭐ level favorit, tulis catatan pribadi, dan buka "Kerjakan Latihan" untuk soal dan coding challenge.</p>
     </section>
 
     <div class="view-toggle-row">
@@ -253,136 +151,151 @@
     </div>
 
     <main class="roadmap" id="roadmap"></main>
-    <p class="empty-state" id="emptyState" style="display:none;">Tidak ada level yang cocok dengan filter atau pencarian ini.</p>
+    <p class="empty-state" id="emptyState" style="display:none;">Tidak ada level yang cocok dengan filter ini.</p>
 
-    <!-- ===== FITUR BARU: Peta Visual ala roadmap.sh =====
-         Ini TIDAK menggantikan tampilan list di atas — cuma cara pandang lain
-         untuk data & progress yang sama persis. Semua logika lama (checklist,
-         filter, notes, dsb.) di #roadmap tetap utuh dan tidak disentuh. -->
     <div class="visual-roadmap" id="visualRoadmap" style="display:none;"></div>
 
-    <!-- ===== PRIORITAS #2: slot iklan display (mis. Google AdSense) =====
-         Setelah AdSense disetujui, ganti isi div ini dengan kode <ins class="adsbygoogle">
-         yang diberikan Google. Ditaruh di sini karena pengunjung sudah scroll cukup jauh
-         (baca peta belajar) sehingga tidak mengganggu first impression di hero. -->
+    <!-- Ad Slot -->
     <div class="ad-slot" id="adSlotMid">
       <span class="ad-slot-label">Ruang Iklan</span>
     </div>
 
-    <!-- ===== PRIORITAS #2: contoh rekomendasi afiliasi =====
-         Ganti judul/link di bawah dengan produk afiliasi asli (mis. kursus coding
-         berbayar, buku, atau tool development) setelah kamu daftar program afiliasinya. -->
+    <!-- Rekomendasi -->
     <section class="recommend">
-      <h2>🔗 Rekomendasi buat lanjut belajar</h2>
-      <p>Kalau sudah nyaman dengan dasar-dasarnya di sini, beberapa resource lanjutan yang bisa kamu pertimbangkan:</p>
+      <h2>🔗 Rekomendasi lanjutan</h2>
       <div class="recommend-grid">
-        <a class="recommend-card" href="#" rel="sponsored noopener" target="_blank">
+        <a class="recommend-card" href="#" rel="sponsored" target="_blank">
           <b>Kursus Coding Terstruktur</b>
-          <span>Ganti dengan link afiliasi kursus (mis. Dicoding, Udemy, dsb.)</span>
+          <span>Ganti dengan link afiliasi kursus</span>
         </a>
-        <a class="recommend-card" href="#" rel="sponsored noopener" target="_blank">
-          <b>Buku/Ebook Pemrograman</b>
-          <span>Ganti dengan link afiliasi buku (mis. Amazon Associates, Gramedia)</span>
+        <a class="recommend-card" href="#" rel="sponsored" target="_blank">
+          <b>Buku Pemrograman</b>
+          <span>Ganti dengan link afiliasi buku</span>
         </a>
-        <a class="recommend-card" href="#" rel="sponsored noopener" target="_blank">
-          <b>Hosting/Domain untuk Proyek</b>
-          <span>Ganti dengan link afiliasi hosting/domain (mis. Niagahoster)</span>
+        <a class="recommend-card" href="#" rel="sponsored" target="_blank">
+          <b>Hosting & Domain</b>
+          <span>Ganti dengan link afiliasi hosting</span>
         </a>
       </div>
     </section>
 
-    <!-- ===== PRIORITAS #3: konten artikel untuk SEO/traffic organik =====
-         Ini contoh 2 artikel pendek. Idealnya tiap artikel jadi halaman .html
-         terpisah (mis. /artikel/cara-mulai-belajar-coding.html) supaya bisa
-         menangkap lebih banyak kata kunci pencarian di Google. -->
+    <!-- Artikel -->
     <section class="articles">
       <h2>📝 Artikel & Tips</h2>
       <article class="article-card">
         <h3>Cara Mulai Belajar Coding Otodidak Tanpa Bingung</h3>
-        <p>Banyak pemula berhenti di minggu pertama karena mencoba belajar semua hal sekaligus. Kuncinya: pilih satu bahasa, selesaikan dasar-dasarnya dulu, baru bikin proyek kecil yang nyata — sekecil apa pun. Progres kecil yang konsisten jauh lebih efektif daripada belajar maraton lalu berhenti total.</p>
+        <p>Banyak pemula berhenti karena belajar semuanya sekaligus. Kunci: pilih satu bahasa, kuasai dasar, baru bikin proyek kecil.</p>
       </article>
       <article class="article-card">
-        <h3>Bahasa Pemrograman Apa yang Cocok untuk Pemula?</h3>
-        <p>Tidak ada jawaban tunggal — tapi kalau tujuannya web, JavaScript jadi pilihan wajar karena langsung terlihat hasilnya di browser. Kalau tertarik data atau otomatisasi, Python lebih ramah untuk pemula karena sintaksnya sederhana. Yang terpenting bukan bahasanya, tapi konsistensi latihan.</p>
+        <h3>Bahasa Pemrograman Apa untuk Pemula?</h3>
+        <p>Tidak ada jawaban tunggal, tapi Python atau JavaScript ramah untuk pemula. Konsepnya mirip di semua bahasa.</p>
       </article>
     </section>
 
-    <!-- ===== FITUR BARU: Tentang Kami =====
-         Ganti isi paragraf ini sesuai cerita asli kalian berdua — ini draft awal
-         yang bisa diedit bebas. -->
+    <!-- Tentang Kami -->
     <section class="about-us">
       <h2>👋 Tentang Kami</h2>
-      <p>Belajar Ngoding dari Nol dibuat oleh <b>Muhammad Raihan</b> dan <b>Naufal Abdillah</b> — dua orang yang juga pernah merasa kebingungan pas pertama kali coba belajar coding sendirian. Kami bikin peta belajar ini supaya orang lain tidak perlu tersesat mencari "harus mulai dari mana", dan bisa belajar dengan langkah-langkah kecil yang jelas urutannya.</p>
-      <p>Web ini gratis untuk digunakan siapa saja. Kalau kamu merasa terbantu, dukungan lewat fitur Premium sangat berarti buat kami terus mengembangkan konten dan fitur baru.</p>
+      <p>Dibuat oleh <b>Muhammad Raihan</b> dan <b>Naufal Abdillah</b> — dua orang yang juga pernah bingung saat pertama belajar coding sendirian.</p>
     </section>
 
-    <!-- ===== FITUR BARU: FAQ =====
-         Tambah/edit pertanyaan sesuai yang paling sering ditanyakan pengunjung nyata
-         seiring waktu. -->
+    <!-- FAQ -->
     <section class="faq-section">
-      <h2>❓ Pertanyaan yang Sering Ditanyakan</h2>
+      <h2>❓ FAQ</h2>
       <details class="faq-item">
-        <summary>Apakah web ini benar-benar gratis?</summary>
-        <p>Ya, seluruh peta belajar, latihan soal, dan latihan coding bisa diakses gratis. Fitur Premium sifatnya opsional untuk yang ingin memberi dukungan lebih dan mendapat beberapa keuntungan tambahan.</p>
+        <summary>Apakah benar-benar gratis?</summary>
+        <p>Ya, semua akses gratis. Premium opsional untuk mendukung pengembangan.</p>
       </details>
       <details class="faq-item">
-        <summary>Apakah sertifikat/tanda selesai dari web ini diakui sekolah atau kampus?</summary>
-        <p>Tidak secara resmi. Web ini bukan lembaga pendidikan terakreditasi, jadi progress di sini paling cocok dipakai sebagai bukti belajar mandiri di portofolio/CV, bukan sebagai kredit akademik resmi.</p>
+        <summary>Sertifikat diakui?</summary>
+        <p>Tidak resmi, tapi cocok untuk portofolio/CV sebagai bukti belajar mandiri.</p>
       </details>
       <details class="faq-item">
-        <summary>Progress belajar saya tersimpan di mana?</summary>
-        <p>Secara default tersimpan di browser (localStorage) perangkat yang kamu pakai. Kalau login dengan Google, progress juga otomatis tersimpan ke akun kamu sehingga bisa diakses lagi dari perangkat lain.</p>
+        <summary>Progress tersimpan di mana?</summary>
+        <p>Default di browser. Dengan login Google, tersimpan ke akun kamu.</p>
       </details>
-      <details class="faq-item">
-        <summary>Saya pemula banget, harus mulai dari bahasa apa?</summary>
-        <p>Python atau JavaScript adalah pilihan paling ramah untuk pemula. Tidak ada pilihan yang salah — konsep dasarnya mirip di semua bahasa, jadi kamu bisa pindah bahasa kapan saja lewat pemilih bahasa di atas.</p>
-      </details>
-    </section>
-
-    <!-- ===== FITUR BARU: Komentar/Diskusi (Giscus, berbasis GitHub Discussions) =====
-         CARA AKTIVASI:
-         1. Aktifkan "Discussions" di repo GitHub kamu (Settings > Features > centang Discussions).
-         2. Buka https://giscus.app, isi form dengan repo kamu, pilih kategori diskusi,
-            lalu situs itu akan menampilkan potongan <script> dengan data-repo-id dan
-            data-category-id yang SUDAH SESUAI repo kamu.
-         3. Ganti nilai data-repo, data-repo-id, data-category, data-category-id di bawah
-            dengan punya kamu (jangan pakai punya orang lain, itu punya repo yang beda). -->
-    <section class="discussion-section">
-      <h2>💬 Diskusi & Pertanyaan</h2>
-      <p>Ada pertanyaan atau ingin diskusi soal materi belajar? Tulis di bawah ini.</p>
-      <script src="https://giscus.app/client.js"
-        data-repo="GANTI-DENGAN-USERNAME/GANTI-DENGAN-NAMA-REPO"
-        data-repo-id="GANTI-DENGAN-REPO-ID"
-        data-category="General"
-        data-category-id="GANTI-DENGAN-CATEGORY-ID"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="id"
-        crossorigin="anonymous"
-        async>
-      </script>
     </section>
 
     <section class="closing">
       <h2>Nggak ada yang langsung jago dari level 1.</h2>
-      <p>Yang membedakan orang yang akhirnya bisa ngoding dan yang berhenti di tengah jalan cuma satu: terus lanjut walau pelan. Selesaikan satu topik hari ini, satu lagi besok.</p>
+      <p>Yang membedakan adalah konsistensi. Terus lanjut walau pelan.</p>
       <div class="signoff">selamat belajar &amp; selamat error-error pertama :)</div>
       <div class="credit">Dibuat oleh <b>Muhammad Raihan</b> &amp; <b>Naufal Abdillah</b></div>
     </section>
 
   </div>
 
-  <!-- ============ HALAMAN: LATIHAN SOAL & CODING PER LEVEL ============ -->
+  <!-- ============ HALAMAN: KUIS HARIAN ============ -->
+  <div id="view-daily-quiz" style="display:none;">
+    <div class="practice-nav">
+      <button class="back-btn" id="dailyQuizBackBtn">← Kembali ke Beranda</button>
+      <div class="streak-badge" id="streakBadgeNav">🔥 0 hari</div>
+    </div>
+    <section class="daily-quiz-page">
+      <div class="daily-quiz-card">
+        <h2>🗓️ Kuis Harian</h2>
+        <p>5 soal acak baru setiap hari. Jaga <b>streak</b> belajarmu!</p>
+        <div id="dailyQuizIntro">
+          <button type="button" class="exam-start-btn" id="dailyQuizStartBtn">Mulai Kuis</button>
+          <span class="daily-quiz-status" id="dailyQuizStatus"></span>
+        </div>
+        <div id="dailyQuizBody" style="display:none;">
+          <div id="dailyQuizQuestions"></div>
+          <button class="exam-finish-btn" id="dailyQuizFinishBtn">Selesai</button>
+          <div class="exam-result" id="dailyQuizResult"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ HALAMAN: LATIHAN TANPA HENTI ============ -->
+  <div id="view-endless-practice" style="display:none;">
+    <div class="practice-nav">
+      <button class="back-btn" id="endlessBackBtn">← Kembali ke Beranda</button>
+      <div class="xp-badge" id="xpBadgeNav">⭐ 0 XP · Pemula</div>
+    </div>
+    <section class="endless-practice-page">
+      <div class="endless-practice-card">
+        <h2>🔁 Latihan Tanpa Henti</h2>
+        <p>Soal terus lanjut tanpa batas — dari bank soal semua bahasa.</p>
+        <div id="endlessIntro">
+          <button type="button" class="exam-start-btn" id="endlessStartBtn">Mulai Latihan</button>
+        </div>
+        <div id="endlessBody" style="display:none;">
+          <div id="endlessQuestion"></div>
+          <button class="exam-finish-btn" id="endlessNextBtn">Soal Berikutnya →</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ HALAMAN: LEADERBOARD ============ -->
+  <div id="view-leaderboard" style="display:none;">
+    <div class="practice-nav">
+      <button class="back-btn" id="leaderboardBackBtn">← Kembali ke Beranda</button>
+    </div>
+    <section class="leaderboard-page">
+      <div class="leaderboard-card">
+        <h2>🏆 Papan Peringkat</h2>
+        <p>Bandingkan XP kamu dengan pembelajar lain.</p>
+        <div id="leaderboardNamePrompt">
+          <input type="text" id="leaderboardNameInput" placeholder="Nama panggilan kamu" maxlength="20">
+          <button type="button" id="leaderboardNameSaveBtn">Gabung Papan Peringkat</button>
+        </div>
+        <div id="leaderboardNotReady" style="display:none;">
+          <span class="daily-quiz-status">⚙️ Belum aktif — pemilik web perlu setup Firebase.</span>
+        </div>
+        <ol id="leaderboardList" class="leaderboard-list"></ol>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ HALAMAN: LATIHAN PER LEVEL ============ -->
   <div id="view-practice" style="display:none;">
     <div class="practice-nav">
       <button class="back-btn" id="practiceBackBtn">← Kembali ke Beranda</button>
       <div class="practice-nav-right">
-        <button class="nav-arrow-btn" id="practicePrevBtn">‹ Level sebelumnya</button>
-        <button class="nav-arrow-btn" id="practiceNextBtn">Level berikutnya ›</button>
+        <button class="nav-arrow-btn" id="practicePrevBtn">‹ Sebelumnya</button>
+        <button class="nav-arrow-btn" id="practiceNextBtn">Berikutnya ›</button>
       </div>
     </div>
     <div class="practice-header" id="practiceHeader"></div>
@@ -397,31 +310,24 @@
     <section class="exam-section" id="examSection">
       <div class="exam-card">
         <h2>🎓 Ujian Akhir</h2>
-        <p>Setelah mencicil latihan soal di tiap level, coba uji pemahamanmu di sini. Ujian ini dibagi menjadi beberapa TAHAP (bukan cuma satu babak panjang) — setiap tahap mencakup dua level roadmap sekaligus, dan kamu harus menyelesaikan satu tahap dulu sebelum lanjut ke tahap berikutnya. Setiap kali jawab, langsung muncul penjelasan. Bisa diulang kapan saja, tidak ada batas waktu.</p>
+        <p>Uji pemahamanmu dengan ujian multi-tahap.</p>
         <div class="exam-stage-tracker" id="examStageTracker"></div>
-        <button class="exam-start-btn" id="examStartBtn">Mulai Ujian Akhir</button>
+        <button class="exam-start-btn" id="examStartBtn">Mulai Ujian</button>
         <div id="examBody" style="display:none;margin-top:20px;">
           <h3 class="exam-stage-title" id="examStageTitle"></h3>
-          <div class="exam-live-bar" id="examLiveBar">Terjawab: 0/0 • Skor sementara: 0/0</div>
+          <div class="exam-live-bar" id="examLiveBar">Terjawab: 0/0</div>
           <div id="examQuestions"></div>
-          <button class="exam-finish-btn" id="examFinishBtn">Lihat Hasil Akhir</button>
+          <button class="exam-finish-btn" id="examFinishBtn">Lihat Hasil</button>
           <div class="exam-result" id="examResult"></div>
         </div>
       </div>
     </section>
   </div>
 
+  <!-- Back to Top & Toast -->
   <button class="backtotop" id="backToTop" title="Kembali ke atas">↑</button>
   <div class="toast" id="toast"></div>
 
-<!-- ===== FITUR BARU: Firebase untuk Papan Peringkat (Leaderboard) =====
-     Dipasang sebagai dua <script> terpisah (bukan module) supaya gampang
-     dipakai dari script.js yang sudah ada, tanpa perlu ubah struktur kode.
-     Kalau FIREBASE_CONFIG di script.js masih kosong, fitur ini otomatis
-     nonaktif dengan aman (tidak bikin error), lihat isFirebaseReady(). -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
